@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simple Music Player</title>
+    <style>
+        /* Add your CSS styles here */
+        #music-player {
+            text-align: center;
+            padding: 20px;
+        }
+        audio {
+            width: 100%;
+        }
+        h2{
+            color:white;
+            font-size: xx-large;
+
+        }
+        body{
+            background-color:indigo
+        }
+    </style>
+</head>
+<body>
+    <div id="music-player">
+        <h2>My Music Player</h2>
+        <audio id="audio" controls>
+            <source src="C:\Vaishu\Chand sifarish karta hamari.mp3" type="audio/mpeg">
+            Your browser does not support the audio element.
+        </audio>
+        <div>
+            <button id="play-pause">Play</button>
+            <input id="volume" type="range" min="0" max="1" step="0.1" value="1">
+        </div>
+        <div>
+            <progress id="progress" value="0" max="1"></progress>
+        </div>
+    </div>
+    <script>
+        // JavaScript code to control the music player
+        const audio = document.getElementById('audio');
+        const playPauseButton = document.getElementById('play-pause');
+        const volumeControl = document.getElementById('volume');
+        const progress = document.getElementById('progress');
+
+        playPauseButton.addEventListener('click', function () {
+            if (audio.paused) {
+                audio.play();
+                playPauseButton.textContent = 'Pause';
+            } else {
+                audio.pause();
+                playPauseButton.textContent = 'Play';
+            }
+        });
+        volumeControl.addEventListener('input', function () {
+            audio.volume = volumeControl.value;
+        });
+
+        audio.addEventListener('timeupdate', function () {
+            const currentTime = audio.currentTime;
+            const duration = audio.duration;
+            progress.value = currentTime / duration;
+        });
+    </script>
+</body>
+</html>
